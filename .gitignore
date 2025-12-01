@@ -24,3 +24,8 @@
 # VS Code Profile-specific files
 .vscode/*.profile
 .vscode/profile/
+
+# Executables
+*.exe
+*.out
+*.app
