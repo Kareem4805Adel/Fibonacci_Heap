@@ -250,6 +250,11 @@ void FibonacciHeap::Cut(node* x, node*y){
 
 	x.parent = nil
 	x.mark = false*/
+	y->children->deleteValue(x);
+	y->degree--;
+	insert(x);
+	x->parent = nullptr;
+	x->mark = false;
 }
 
 void FibonacciHeap::cascading_cut(node* y){
@@ -262,4 +267,13 @@ void FibonacciHeap::cascading_cut(node* y){
 		else:
 		CUT(y, z)
 		CASCADING_CUT(z)*/
+	node* z = y->parent;
+	if (z != nullptr){
+		if (y->mark == false){
+			y->mark = true;
+		}else{
+			Cut(y, z);
+			cascading_cut(z);
+		}
+	}
 }		
