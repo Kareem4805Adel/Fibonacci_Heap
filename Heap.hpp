@@ -1,3 +1,6 @@
+#ifndef HEAP_HPP
+#define HEAP_HPP
+
 #include <iostream>
 #include "linkedlist.cpp"
 using namespace std;
@@ -10,30 +13,31 @@ public:
     node* left;
     node* right;
     node* parent;
-    CircularDoublyLinkedList<node> *children;
+    CircularDoublyLinkedList<node*> *children;
     // taskname not completed
     node(int val , string Tasknamepara) : key(val), left(nullptr), right(nullptr), parent(nullptr), Taskname(Tasknamepara) ,mark(false),degree(0) {
         //pointing to itself
         right = this; 
         left = this;
-        children = new CircularDoublyLinkedList<node>();
+        children = new CircularDoublyLinkedList<node*>();
 
     }
 
     ~node(){
-        delete[] children;
+        delete children;
     }
 
 };
 class FibonacciHeap {
     node* min;
-    CircularDoublyLinkedList<node> * rootlist;
+    CircularDoublyLinkedList<node*> * rootlist;
+public:
     FibonacciHeap() : min(NULL){
-        rootlist = new CircularDoublyLinkedList<node>();
+        rootlist = new CircularDoublyLinkedList<node*>();
     }
 
     ~FibonacciHeap(){
-        delete[] rootlist;
+        delete rootlist;  // Changed from delete[]
     }
 
     node* insert(node* newNode);
@@ -41,8 +45,13 @@ class FibonacciHeap {
     node* extractMin();
     void decreaseKey(node* handle, int newKey);
     void deleteNode(node* handle);
+
+private:
     void Link(node* x, node*y);
     void Consolidate();
     void Cut(node* x, node*y);
     void cascading_cut(node* y);
 };
+
+
+#endif
