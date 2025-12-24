@@ -30,6 +30,21 @@ public:
         head = nullptr;
     }
 
+    CircularDoublyLinkedList(const CircularDoublyLinkedList<t>& other) {
+    head = nullptr;
+
+    if (other.head == nullptr)
+        return;
+
+    Node<t>* current = other.head;
+
+    do {
+        insertLast(current->data);
+        current = current->next;
+    } while (current != other.head);
+}
+
+
     bool isEmpty(){
         return head == nullptr;
     }
